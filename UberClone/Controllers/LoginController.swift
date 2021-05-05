@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LoginControllerDelegate: class {
-    func didUserLogged(controller:LoginController)
+    func didUserLogged(controller:LoginController, completion:()->Void)
 }
 
 class LoginController: UIViewController {
@@ -168,8 +168,9 @@ class LoginController: UIViewController {
             "occupation": "Carpenter"
         ]
         UserDefaults.standard.set(user, forKey: "user")
-        self.delegate?.didUserLogged(controller: self)
-        self.dismiss(animated: true, completion: nil)
+        self.delegate?.didUserLogged(controller: self) {
+            self.dismiss(animated: true, completion: nil)
+        }
         
     }
 

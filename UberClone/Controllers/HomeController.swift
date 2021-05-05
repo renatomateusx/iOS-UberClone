@@ -18,7 +18,6 @@ class HomeController : UIViewController {
         super.viewDidLoad()
         //UserDefaults.standard.set([], forKey: "user")
         configureTabBar()
-        configureUI()
         initializeUser()
     }
     
@@ -34,7 +33,7 @@ class HomeController : UIViewController {
     }
     
     func initializeUser(){
-        let user = UserDefaults.standard.stringArray(forKey: "user") ?? [String]()
+        let user = UserDefaults.standard.object(forKey: "user") as? [String: String] ?? [String: String]()
         if user.count > 0 {
             self.isLogged = true;
         }
@@ -54,8 +53,10 @@ class HomeController : UIViewController {
 }
 
 extension HomeController: LoginControllerDelegate {
-    func didUserLogged(controller: LoginController) {
+    func didUserLogged(controller: LoginController, completion: () -> Void) {
         self.configureUI()
+        completion()
     }
+    
 
 }
