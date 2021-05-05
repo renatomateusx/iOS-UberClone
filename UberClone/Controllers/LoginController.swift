@@ -7,9 +7,16 @@
 
 import UIKit
 
+protocol LoginControllerDelegate: class {
+    func didUserLogged(controller:LoginController)
+}
+
 class LoginController: UIViewController {
 
     // MARK: Properties
+    
+    weak var delegate: LoginControllerDelegate?
+    
     private let titleLabel: UILabel = {
        let label = UILabel()
         label.text = "UBER"
@@ -90,6 +97,7 @@ class LoginController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.layer.cornerRadius = 5
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -145,6 +153,24 @@ class LoginController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    
+    // MARK: Selectors
+    @objc func loginButtonTapped(){
+//        guard let email = emailTextField.text else {return}
+//        guard let pass = passwordTextField.text else {return}
+        
+        
+        let user = [
+            "name": "John Doe",
+            "language": "English",
+            "occupation": "Carpenter"
+        ]
+        UserDefaults.standard.set(user, forKey: "user")
+        self.delegate?.didUserLogged(controller: self)
+        self.dismiss(animated: true, completion: nil)
+        
     }
 
 

@@ -14,6 +14,7 @@
 		416DD6E02641879A0097C2A9 /* UberCloneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416DD6DF2641879A0097C2A9 /* UberCloneUITests.swift */; };
 		416DD6FC264189040097C2A9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416DD6FB264189040097C2A9 /* Extensions.swift */; };
 		416DD7112641B6EF0097C2A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 416DD7102641B6EF0097C2A9 /* Assets.xcassets */; };
+		416DD7192641D63A0097C2A9 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416DD7182641D63A0097C2A9 /* HomeController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		416DD6E12641879A0097C2A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		416DD6FB264189040097C2A9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		416DD7102641B6EF0097C2A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/UberTutorial 2/UberTutorial/Assets.xcassets"; sourceTree = "<group>"; };
+		416DD7182641D63A0097C2A9 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				416DD6C1264187950097C2A9 /* LoginController.swift */,
+				416DD7182641D63A0097C2A9 /* HomeController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				416DD7192641D63A0097C2A9 /* HomeController.swift in Sources */,
 				416DD6C2264187950097C2A9 /* LoginController.swift in Sources */,
 				416DD6BE264187950097C2A9 /* AppDelegate.swift in Sources */,
 				416DD6FC264189040097C2A9 /* Extensions.swift in Sources */,
