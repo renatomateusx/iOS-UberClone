@@ -18,9 +18,16 @@ class HomeController : UIViewController {
     private final let locationInputViewHeight: CGFloat = 200
     var isLogged: Bool = false
     
+    private var user: User? {
+        didSet {
+                locationInputView.user = user
+        }
+    }
+    
     // MARK: Lifecyle
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchUser()
         //UserDefaults.standard.set([], forKey: "user")
         configureTabBar()
         initializeUser()
@@ -56,6 +63,12 @@ class HomeController : UIViewController {
         
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
+    }
+    
+    func fetchUser(){
+        Service.shared.fetchUserData { user in
+            self.user = user
+        }
     }
     
     func initializeUser(){

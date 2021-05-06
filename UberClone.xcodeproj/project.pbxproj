@@ -18,6 +18,8 @@
 		416DD6FC264189040097C2A9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416DD6FB264189040097C2A9 /* Extensions.swift */; };
 		416DD7112641B6EF0097C2A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 416DD7102641B6EF0097C2A9 /* Assets.xcassets */; };
 		416DD7192641D63A0097C2A9 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416DD7182641D63A0097C2A9 /* HomeController.swift */; };
+		417337A5264465AA00980744 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417337A4264465AA00980744 /* Service.swift */; };
+		417337AA2644668B00980744 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417337A92644668B00980744 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		416DD6FB264189040097C2A9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		416DD7102641B6EF0097C2A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../../Downloads/UberTutorial 2/UberTutorial/Assets.xcassets"; sourceTree = "<group>"; };
 		416DD7182641D63A0097C2A9 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		417337A4264465AA00980744 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		417337A92644668B00980744 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +152,7 @@
 		416DD6F12641881E0097C2A9 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				417337A4264465AA00980744 /* Service.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 		416DD6F3264188220097C2A9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				417337A92644668B00980744 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -307,9 +313,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				41571F3B264335F5002612AC /* LocationInputView.swift in Sources */,
+				417337A5264465AA00980744 /* Service.swift in Sources */,
 				41571F362642EDF8002612AC /* LocationInputActivationView.swift in Sources */,
 				416DD7192641D63A0097C2A9 /* HomeController.swift in Sources */,
 				416DD6C2264187950097C2A9 /* LoginController.swift in Sources */,
+				417337AA2644668B00980744 /* User.swift in Sources */,
 				41571F402643728A002612AC /* LocationCell.swift in Sources */,
 				416DD6BE264187950097C2A9 /* AppDelegate.swift in Sources */,
 				416DD6FC264189040097C2A9 /* Extensions.swift in Sources */,
