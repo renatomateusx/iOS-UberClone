@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41571F362642EDF8002612AC /* LocationInputActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41571F352642EDF8002612AC /* LocationInputActivationView.swift */; };
+		41571F3B264335F5002612AC /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41571F3A264335F5002612AC /* LocationInputView.swift */; };
+		41571F402643728A002612AC /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41571F3F2643728A002612AC /* LocationCell.swift */; };
 		416DD6BE264187950097C2A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416DD6BD264187950097C2A9 /* AppDelegate.swift */; };
 		416DD6C2264187950097C2A9 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416DD6C1264187950097C2A9 /* LoginController.swift */; };
 		416DD6CA264187990097C2A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 416DD6C8264187990097C2A9 /* LaunchScreen.storyboard */; };
@@ -35,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		41571F352642EDF8002612AC /* LocationInputActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputActivationView.swift; sourceTree = "<group>"; };
+		41571F3A264335F5002612AC /* LocationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputView.swift; sourceTree = "<group>"; };
+		41571F3F2643728A002612AC /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		416DD6BA264187950097C2A9 /* UberClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UberClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		416DD6BD264187950097C2A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		416DD6C1264187950097C2A9 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -149,6 +155,9 @@
 		416DD6F2264188200097C2A9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				41571F352642EDF8002612AC /* LocationInputActivationView.swift */,
+				41571F3A264335F5002612AC /* LocationInputView.swift */,
+				41571F3F2643728A002612AC /* LocationCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -297,8 +306,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41571F3B264335F5002612AC /* LocationInputView.swift in Sources */,
+				41571F362642EDF8002612AC /* LocationInputActivationView.swift in Sources */,
 				416DD7192641D63A0097C2A9 /* HomeController.swift in Sources */,
 				416DD6C2264187950097C2A9 /* LoginController.swift in Sources */,
+				41571F402643728A002612AC /* LocationCell.swift in Sources */,
 				416DD6BE264187950097C2A9 /* AppDelegate.swift in Sources */,
 				416DD6FC264189040097C2A9 /* Extensions.swift in Sources */,
 			);
