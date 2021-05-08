@@ -10,6 +10,8 @@
 		41571F362642EDF8002612AC /* LocationInputActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41571F352642EDF8002612AC /* LocationInputActivationView.swift */; };
 		41571F3B264335F5002612AC /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41571F3A264335F5002612AC /* LocationInputView.swift */; };
 		41571F402643728A002612AC /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41571F3F2643728A002612AC /* LocationCell.swift */; };
+		416C36AC264565270089564E /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416C36AB264565270089564E /* LocationHandler.swift */; };
+		416C36BC264569E10089564E /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416C36BB264569E10089564E /* DriverAnnotation.swift */; };
 		416DD6BE264187950097C2A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416DD6BD264187950097C2A9 /* AppDelegate.swift */; };
 		416DD6C2264187950097C2A9 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416DD6C1264187950097C2A9 /* LoginController.swift */; };
 		416DD6CA264187990097C2A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 416DD6C8264187990097C2A9 /* LaunchScreen.storyboard */; };
@@ -43,6 +45,8 @@
 		41571F352642EDF8002612AC /* LocationInputActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputActivationView.swift; sourceTree = "<group>"; };
 		41571F3A264335F5002612AC /* LocationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputView.swift; sourceTree = "<group>"; };
 		41571F3F2643728A002612AC /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		416C36AB264565270089564E /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
+		416C36BB264569E10089564E /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
 		416DD6BA264187950097C2A9 /* UberClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UberClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		416DD6BD264187950097C2A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		416DD6C1264187950097C2A9 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				417337A92644668B00980744 /* User.swift */,
+				416C36BB264569E10089564E /* DriverAnnotation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				416DD6FB264189040097C2A9 /* Extensions.swift */,
+				416C36AB264565270089564E /* LocationHandler.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -314,9 +320,11 @@
 			files = (
 				41571F3B264335F5002612AC /* LocationInputView.swift in Sources */,
 				417337A5264465AA00980744 /* Service.swift in Sources */,
+				416C36BC264569E10089564E /* DriverAnnotation.swift in Sources */,
 				41571F362642EDF8002612AC /* LocationInputActivationView.swift in Sources */,
 				416DD7192641D63A0097C2A9 /* HomeController.swift in Sources */,
 				416DD6C2264187950097C2A9 /* LoginController.swift in Sources */,
+				416C36AC264565270089564E /* LocationHandler.swift in Sources */,
 				417337AA2644668B00980744 /* User.swift in Sources */,
 				41571F402643728A002612AC /* LocationCell.swift in Sources */,
 				416DD6BE264187950097C2A9 /* AppDelegate.swift in Sources */,
@@ -491,6 +499,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CPDNCAZJQ6;
 				INFOPLIST_FILE = UberClone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -510,6 +519,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CPDNCAZJQ6;
 				INFOPLIST_FILE = UberClone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

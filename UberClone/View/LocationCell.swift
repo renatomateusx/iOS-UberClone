@@ -6,23 +6,27 @@
 //
 
 import UIKit
+import MapKit
 
 class LocationCell : UITableViewCell {
     
     // MARK: Properties
+    var placeMark: MKPlacemark?
+    
+    
     static let identifier = "LocationCell"
     
     private let titleLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
-        label.text = "148, Monsenhor F. P. Marques"
+//        label.text = "148, Monsenhor F. P. Marques"
         return label
     }()
     
     private let addressLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
-        label.text = "148, Monsenhor F. P. Marques, Salvador, Ba"
+//        label.text = "148, Monsenhor F. P. Marques, Salvador, Ba"
         label.textColor = .lightGray
         return label
     }()
@@ -47,6 +51,13 @@ class LocationCell : UITableViewCell {
         
         addSubview(stack)
         stack.centerY(inView: self, leftAnchor: leftAnchor, paddingLeft: 12)
+    }
+    
+    func configure(withPlacemark placemark: MKPlacemark){
+        self.placeMark = placemark
+        
+        self.titleLabel.text = placemark.name
+        self.addressLabel.text = placemark.address
     }
     
     

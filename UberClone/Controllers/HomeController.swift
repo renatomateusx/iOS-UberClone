@@ -11,10 +11,12 @@ import MapKit
 class HomeController : UIViewController {
     // MARK: Properties
     private let mapView = MKMapView()
-    private let locationManager = CLLocationManager()
+    private let locationManager = LocationHandler.shared.locationManger
     private let inputActivationView = LocationinputActivationView()
     private let locationInputView = LocationInputView()
     private let tableView = UITableView()
+    private var searchResults = [MKPlacemark]()
+    
     private final let locationInputViewHeight: CGFloat = 200
     var isLogged: Bool = false
     
@@ -24,10 +26,17 @@ class HomeController : UIViewController {
         }
     }
     
+    private var drivers: [User]? {
+        didSet{
+            setUpAnnotation()
+        }
+    }
+    
     // MARK: Lifecyle
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchUser()
+        
         //UserDefaults.standard.set([], forKey: "user")
         configureTabBar()
         initializeUser()
@@ -42,7 +51,7 @@ class HomeController : UIViewController {
         view.backgroundColor = .backgroundColor
         enableLocationServices()
         configureMap()
-        
+        fetchDrivers()
         view.addSubview(inputActivationView)
         inputActivationView.centerX(inView: view)
         inputActivationView.setDimensions(height: 50, width: view.frame.width - 64)
@@ -52,7 +61,6 @@ class HomeController : UIViewController {
         UIView.animate(withDuration: 2) {
             self.inputActivationView.alpha = 1
         }
-        
         configureTableView()
     }
     
@@ -63,12 +71,53 @@ class HomeController : UIViewController {
         
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
+        mapView.delegate = self
     }
     
     func fetchUser(){
         Service.shared.fetchUserData { user in
             self.user = user
         }
+    }
+    
+    func fetchDrivers(){
+        Service.shared.fetchDrivers { drivers in
+            self.drivers = drivers
+        }
+    }
+    
+    func setUpAnnotation(){
+        guard let drivers = self.drivers else {return}
+        for driver in drivers {
+            guard let coordinate = driver.location?.coordinate else {return}
+            let driverAnnotation = DriverAnnotation(withUID: driver.uid, coordinate: coordinate)
+            
+            var driverIsVisible: Bool {
+                return self.mapView.annotations.contains(where: { annotation -> Bool in
+                    guard let driverAnno = annotation as? DriverAnnotation else {return false}
+                    if driverAnno.uid == driver.uid {
+                        return true
+                    }
+                    return false
+                })
+            }
+            
+            if !driverIsVisible {
+                self.mapView.addAnnotation(driverAnnotation)
+            }
+        }
+//        updateAnnotation()
+    }
+    
+    func updateAnnotation(){
+        DispatchQueue.main.async {
+            guard let drivers = self.drivers else {return}
+            guard let userLocation = self.locationManager?.location else {return}
+            Service.shared.updateAnnotation(withMe: userLocation, drivers: drivers) { drivers in
+                self.drivers = drivers
+            }
+        }
+       
     }
     
     func initializeUser(){
@@ -129,18 +178,18 @@ extension HomeController: LoginControllerDelegate {
 
 extension HomeController: CLLocationManagerDelegate {
     func enableLocationServices(){
-        locationManager.delegate = self
-        
-        switch locationManager.authorizationStatus {
+        switch locationManager?.authorizationStatus {
         case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
+            locationManager?.requestWhenInUseAuthorization()
         case .restricted, .denied:
             break
         case .authorizedAlways:
-            locationManager.startUpdatingLocation()
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager?.startUpdatingLocation()
+            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         case .authorizedWhenInUse:
-            locationManager.requestAlwaysAuthorization()
+            locationManager?.requestAlwaysAuthorization()
+        case .none:
+            break
         @unknown default:
             break
         }
@@ -148,7 +197,7 @@ extension HomeController: CLLocationManagerDelegate {
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         if manager.authorizationStatus == .authorizedWhenInUse {
-            locationManager.requestAlwaysAuthorization()
+            locationManager?.requestAlwaysAuthorization()
         }
     }
 }
@@ -165,6 +214,13 @@ extension HomeController: LocationinputActivationViewDelegate{
 // MARK: LocationInputViewDelegate
 
 extension HomeController : LocationInputViewDelegate {
+    func executeQuery(query: String) {
+        searchBy(naturalLanguageQuery: query) { (resultsPlacemarks) in
+            self.searchResults = resultsPlacemarks
+            self.tableView.reloadData()
+        }
+    }
+    
     func didTapBackButton() {
         
         UIView.animate(withDuration: 0.3) {
@@ -190,12 +246,48 @@ extension HomeController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 2 : 5
+        return section == 0 ? 2 : self.searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: LocationCell.identifier, for: indexPath) as! LocationCell
-        
+        if indexPath.section == 1 {
+            cell.configure(withPlacemark: searchResults[indexPath.row])
+        }
         return cell
+    }
+}
+
+// MARK: MKMapViewDelegate
+extension HomeController : MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotation = annotation as? DriverAnnotation {
+            let view = MKAnnotationView(annotation: annotation, reuseIdentifier: DriverAnnotation.identifier)
+            view.image = #imageLiteral(resourceName: "chevron-sign-to-right")
+            return view
+        }
+        return nil
+    }
+}
+
+
+// MARK: Map Helper Functions
+
+private extension HomeController {
+    func searchBy(naturalLanguageQuery: String, completion: @escaping([MKPlacemark]) -> Void){
+        var results = [MKPlacemark]()
+        let request = MKLocalSearch.Request()
+        request.region = mapView.region
+        request.naturalLanguageQuery = naturalLanguageQuery
+        
+        let search = MKLocalSearch(request: request)
+        search.start { (response, error) in
+            guard let response = response else {return}
+            
+            response.mapItems.forEach ({ item  in
+                results.append(item.placemark)
+            })
+            completion(results)
+        }
     }
 }

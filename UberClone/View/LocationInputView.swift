@@ -9,6 +9,7 @@ import UIKit
 
 protocol LocationInputViewDelegate: class {
     func didTapBackButton()
+    func executeQuery(query: String)
 }
 
 class LocationInputView : UIView {
@@ -72,7 +73,8 @@ class LocationInputView : UIView {
         tf.placeholder = "Enter a destination..."
         tf.backgroundColor = .systemGroupedBackground
         tf.font = UIFont.systemFont(ofSize: 14)
-        
+        tf.returnKeyType = .search
+        tf.delegate = self
         let paddingView = UIView()
         paddingView.setDimensions(height: 30, width: 8)
         tf.leftView = paddingView
@@ -108,7 +110,7 @@ class LocationInputView : UIView {
         
         addSubview(destinationLocationTextField)
         destinationLocationTextField.anchor(top: startingLocationTextField.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 12, paddingLeft: 40, paddingRight: 40, height: 30)
-        
+        destinationLocationTextField.delegate = self
         addSubview(startLocationIndicatorView)
         startLocationIndicatorView.centerY(inView: startingLocationTextField, leftAnchor: leftAnchor, paddingLeft: 20)
         startLocationIndicatorView.setDimensions(height: 6, width: 6)
@@ -128,5 +130,20 @@ class LocationInputView : UIView {
     
     @objc func didTapBackButton(){
         delegate?.didTapBackButton()
+    }
+}
+
+
+extension LocationInputView : UITextFieldDelegate {
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        guard let query = textField.text else {return false}
+//        delegate?.executeQuery(query: query)
+//        return true
+//    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let query = textField.text else {return false}
+        delegate?.executeQuery(query: query)
+        return true
     }
 }
