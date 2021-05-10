@@ -6,4 +6,4 @@ That project was made to review some concepts. Still missing the driver app, and
 I just did the single view of the app, but I want to do more.
 
 # Preview
-![Screenshot](uberClone.gif)
+![Screenshot](clonseUberGif.gif)
