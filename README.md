@@ -7,4 +7,4 @@ I just did the single view of the app, but I want to do more.
 
 # Preview
 <img src="https://github.com/renatomateusx/iOS-UberClone/blob/master/clonseUberGif.gif" width="350" title="UberX">
-![Screenshot](clonseUberGif.gif)
+
