@@ -39,7 +39,7 @@ class HomeController : UIViewController {
         }
     }
     
-    private var drivers: [User]? {
+    var drivers: [User]? {
         didSet{
             setUpAnnotation()
         }
@@ -212,6 +212,7 @@ class HomeController : UIViewController {
     func configureRideActionView(){
         view.addSubview(rideActionView)
         rideActionView.frame =  CGRect(x: 0, y: view.frame.height, width: view.frame.width, height: rideActionViewHeight)
+        rideActionView.delegate = self
     }
     
     func animateRideActionView(should: Bool, destination: MKPlacemark? = nil)
@@ -317,7 +318,7 @@ extension HomeController : LocationInputViewDelegate {
 // MARK: UITableView
 extension HomeController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Test"
+        return ""
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -432,6 +433,21 @@ private extension HomeController {
         }
     }
     
+    func generateDriverPolyline(fromMe from: MKMapItem, toDestination: MKMapItem){
+        let request = MKDirections.Request()
+        request.source = from
+        request.destination = toDestination
+        request.transportType = .automobile
+        
+        let directionRequest = MKDirections(request: request)
+        directionRequest.calculate { (response, error) in
+            guard let response = response else { return }
+            self.route = response.routes[0]
+            guard let polyline = self.route?.polyline else {return}
+            self.mapView.addOverlay(polyline)
+        }
+    }
+    
     func removeAnnotationAndOverlays(){
         self.mapView.annotations.forEach { (annotation) in
             if let anno = annotation as? MKPointAnnotation {
@@ -442,5 +458,28 @@ private extension HomeController {
             mapView.removeOverlay(mapView.overlays[0])
         }
     }
+    
+    func removeOverlays(){
+        if mapView.overlays.count > 0 {
+            mapView.removeOverlay(mapView.overlays[0])
+        }
+    }
+    
+}
+
+
+extension HomeController : RideActionViewDelegate {
+    func didTapConfirmUber() {
+        animateRideActionView(should: false)
+        removeOverlays()
+        guard let drivers = self.drivers else {return}
+        guard let coordinate = drivers[0].location?.coordinate else {return}
+        let driverPlaceMark = MKPlacemark(coordinate: coordinate)
+        let driverMkMapItem = MKMapItem(placemark: driverPlaceMark)
+        self.generateDriverPolyline(fromMe: driverMkMapItem, toDestination: MKMapItem.forCurrentLocation())
+        self.mapView.zoomToFit(annotations: mapView.annotations)
+        
+    }
+    
     
 }

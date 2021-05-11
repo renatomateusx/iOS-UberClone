@@ -8,8 +8,14 @@
 import MapKit
 import UIKit
 
+protocol RideActionViewDelegate: class {
+    func didTapConfirmUber()
+}
+
 class RideActionView: UIView {
     //MARK: Properties
+    weak var delegate: RideActionViewDelegate?
+    
     var destination: MKPlacemark? {
         didSet{
             titleLabel.text = destination?.name
@@ -118,6 +124,6 @@ class RideActionView: UIView {
     //MARK: Selectors
     
     @objc func actionButtonPressed(){
-        
+        delegate?.didTapConfirmUber()
     }
 }
